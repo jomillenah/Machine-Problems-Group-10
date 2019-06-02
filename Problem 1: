@@ -1,0 +1,107 @@
+//problem 2 :
+// This program computes the  interior angles, area and perimeter,apothem and circumcenter and classifies what type of triangle and angle
+#include <iostream>
+#include <conio.h>
+#include <cmath> //used cmath for computing numbers
+#define Pi 3.14159265
+ 
+ 
+using namespace std;
+ 
+int main()
+{
+​//declare the variables needed to be used (lengths)
+​double sideA,sideB,sideC,perimeter,area,heron,apothem,heronarea,circumcenter;
+​//declare variables for angles
+​double angleA,angleB,angleC;
+​const double pi=3.14159265; //value of pi just to be sure no error will run in the caclculations for angles
+​double angle_in_deg = acos((sideA*sideA+sideB*sideB-sideC*sideC)/2*sideA*sideB) * 180/pi;
+​
+​//introduction and input of the lengths
+​cout << "This is a Triangle Calculator\n";
+​cout << " \n";
+​cout << "Please input the lengths of 3 sides \n";
+​cout << " \n";
+​cout << "NOTE: the LARGEST SIDE must be 'C'and will AUTOMATICALLY be the HYPOTENUSE!!!\n";
+​cout << " \n";
+​cout << "Side A: "; cin >> sideA;
+​cout << " \n";
+​cout << "Side B: "; cin >> sideB;
+​cout << " \n";
+​cout << "Side C: "; cin >> sideC;
+​
+​//declaring final outputs for easier insertion in the code
+​perimeter = sideA + sideB + sideC;
+​// calculations for the AREA using HERON's formula
+​heron = (sideA+sideB+sideC)/2;
+​heronarea = sqrt(heron*(heron-sideA)*(heron-sideB)*(heron-sideC));
+​area = sideA*sideB/2;
+​circumcenter=(sideA*sideB*sideC)/sqrt((sideA+sideB+sideC)*(sideB+sideC-sideA)*(sideC+sideA-sideB)*(sideA+sideB-sideC));
+ 
+​
+​//disply outputs of the program:
+​cout << " \n";
+​cout << "Sides are: A = " << sideA << " ||  B = " << sideB << " || C = " << sideC << endl;
+​cout << " \n";
+​cout << "The perimeter of the triangle is: " << perimeter << endl;
+​cout << " \n";
+ 
+​//this code using if else tells what type of triangle is with the given lengths
+​if(sideA + sideB > sideC && sideB + sideC > sideA && sideC +sideA > sideB)
+ {
+   if(sideA * sideA + sideB * sideB == sideC * sideC)
+​  cout<<"This triangle is a Right Triangle";
+   else if(sideA * sideA + sideB * sideB > sideC * sideC)
+     cout<<"This triangle is an Acute Triangle";
+   else if(sideA * sideA + sideB * sideB < sideC * sideC)
+     cout<<"This triangle is an Obtuse Triangle";
+ 
+ ​else if (sideC < sideA && sideB > sideC)
+   cout<<"This is not a Triangle!! \n";
+}
+​cout << " and a ";
+ 
+​//for Scalene/ Equilateral / Isosceles
+​if( sideA == sideB && sideB == sideC && sideC == sideA)
+​cout << "Equilateral Triangle";
+​
+​if( sideA != sideB && sideB != sideC && sideC != sideA)
+​cout << "Scalene Triangle";
+​
+​if ( (sideA != sideB && sideB == sideC) || (sideA != sideC && sideB == sideA) || ( sideB != sideC && sideA == sideC) || ( sideB != sideC && sideB == sideA))
+​cout << "Isosceles Triangle";
+​if(( sideB != sideC && sideA == sideC) || ( sideB != sideC && sideB == sideA))
+​cout << "Isosceles Triangle";
+​
+​// used Law of Cosines to use the rules and formulas of the triangles to calculate the interior angles
+​//first angle
+​
+​angleA = acos(((sideB*sideB)+(sideC*sideC)-(sideA*sideA))/(2*sideB*sideC)) * 180 / Pi;
+​angleB = acos(((sideA*sideA)+(sideC*sideC)-(sideB*sideB))/(2*sideA*sideC)) * 180 / Pi;
+​angleC = acos(((sideA*sideA)+(sideB*sideB)-(sideC*sideC))/(2*sideA*sideB)) * 180 / Pi;
+​//calculation for apothem
+​apothem=angleC/2*tan(180/3);
+​
+​
+​// display for angles
+​cout << " \n";
+​cout << " A N G L E S : ";
+​cout << " \n";
+​cout << "The angle of angle A is : " << angleA << endl;
+​cout << " \n";
+​cout << "The angle of angle B is : " << angleB << endl;
+​cout << " \n";
+​cout << "The angle of angle C is : " << angleC << endl;
+​cout << " \n";​​
+​cout << "The Area of the triangle is : " << area << endl;
+​cout << " \n";
+​cout << "The Area of the triangle using Heron formula is : " << heronarea << endl;
+​cout << " \n";
+​cout << "The Apothem of the triangle is: " << apothem << endl;
+​cout << " \n";
+​cout << "The Circumcenter of the triangle is: " << circumcenter << endl;
+ 
+​
+​
+​return 0;
+}​
