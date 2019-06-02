@@ -1,0 +1,151 @@
+//MachineProblem 1: This code calculates the grades of each student and shows the top 10 students in a class of 50 
+#include <bits/stdc++.h> // this is a compilation of libraries for c++
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main ()
+{
+  // declared the variables using double for the grades and values while using string for student name and their class standing 
+  string studentNames[50];
+  double transmuted[50];
+  double rawGradeArray[50];
+  double exp[9], skill[9], mp[2], me[2];
+  string standing[50];
+  double expRaw[50], skillRaw[50], machineRaw[50], majorRaw[50];
+  double experimentTotal[50], skillTestTotal[50], machineProblemTotal[50], majorExamTotal1[50], majorExamTotal2[50];
+
+  // main loop for inputting student name and inside their respective scores
+  for(int i = 0; i < 50; i++){
+	  double experimentScore = 0, skillTestScore = 0, machineProblemScore = 0, majorExaminationScore = 0;
+	  // Name of Student
+	  string inputName;
+	  cout <<"Input name of student number " << i + 1 <<": " <<endl;
+
+	  getline(cin, inputName); // used getline instead of simple cin>> because cin>> makes the program finish automatically 
+	  studentNames[i] = inputName;
+	  cout << "_____________________________________________ \n"<< endl; //using this to divide the display output to look clean
+	  // Experiment loop
+	  for(int j = 0; j < 9; j++){
+		  cout << "Input " << studentNames[i] << "'s experiment " << (j + 1) << " grade: ";
+		  cin >> experimentScore;
+		  exp[j] = experimentScore;
+		  experimentTotal[i] += exp[j];
+	  }
+	  expRaw[i] =  (experimentTotal[i] / 900) * 10; // formula for experiment grade
+	  cout << "_____________________________________________ \n"<< endl;  //using this to divide the display output to look clean
+	  // Skill Test loop
+	  	  for(int k = 0; k < 9; k++){
+	  		  cout << "Input " << studentNames[i] << "'s skill test " << (k + 1) << " grade: ";
+	  		  cin >> skillTestScore;
+	  		  skill[k] = skillTestScore;
+	  		  skillTestTotal[i] += skill[k];
+
+	  	  }
+	  skillRaw[i] =  (skillTestTotal[i] / 900) * 20; // formula for skillstest grade
+	  cout << "_____________________________________________ \n"<< endl;
+	  // Machine problem loop
+	  	  	  for(int p = 0; p < 2; p++){
+	  	  		  cout << "Input " << studentNames[i] << "'s machine problem " << (p + 1) << " grade: "; 
+	  	  		  cin >> machineProblemScore;
+	  	  		  mp[p] = machineProblemScore;
+	  	  		  machineProblemTotal[i] += mp[p];
+
+	  	  	  }
+	  	  	machineRaw[i] =  (machineProblemTotal[i] * 20) / 200; // forumla for the machine problem grade
+	  	  cout << "- - - - - - - - - - - - - - - - - - - - - -"<< endl;  //using this to divide the display output to look clean
+	  	  // Major Exam loop used if-else for the input for separate exam grades
+	  	  	  	  	  for(int o = 0; o < 2; o++){
+	  	  	  	  		  if(o == 0){
+	  	  	  	  		  cout << "Input " << studentNames[i] << "'s Preliminary exam grade: ";
+	  	  	  	  		  } else if(o == 1){
+	  	  	  	  			  cout << "Input " << studentNames[i] << "'s Final exam grade: ";
+	  	  	  	  		  }
+	  	  	  	  		  cin >> majorExaminationScore;
+
+	  	  	  	  		  if(o == 0){
+	  	  	  	  			  me[o] = majorExaminationScore;
+	  	  	  	  			  majorExamTotal1[i] = me[o];
+	  	  	  	  		  } else if(o == 1){
+	  	  	  	  			  me[o] = majorExaminationScore;
+	  	  	  	  			  majorExamTotal2[i] = me[o];
+	  	  	  	  		  }
+
+	  	  	  	  	  }
+	  	  	  	  	  majorRaw[i] =  (((majorExamTotal1[i]) / 100) * 20) + ((majorExamTotal2[i] / 100) * 30); // formula for raw grade 
+
+	  	  	  	  	  cout << endl << endl;
+	  	  	  	rawGradeArray[i] = majorRaw[i] + machineRaw[i] + skillRaw[i] + expRaw[i];
+	  	  	cout << "- - - - - - - - - - - - - - - - - - - - - -"<< endl;
+
+	  	// using if-else conditional statements for corresponding transmutation grades
+	  	if(rawGradeArray[i] < 60){
+	  		 transmuted[i] = 5.00;
+	  	} else if((rawGradeArray[i] >= 60) && (rawGradeArray[i] <= 64.44)){
+	  		transmuted[i] = 3.00;
+	  	} else if((rawGradeArray[i] >= 64.45) && (rawGradeArray[i] <= 68.89)){
+	  		transmuted[i] = 2.75;
+	  	} else if((rawGradeArray[i] >= 68.90) && (rawGradeArray[i] <= 73.33)){
+	  		transmuted[i] = 2.50;
+	  	} else if((rawGradeArray[i] >= 73.34) && (rawGradeArray[i] <= 77.78)){
+	  		transmuted[i] = 2.25;
+	  	} else if((rawGradeArray[i] >= 77.79) && (rawGradeArray[i] <= 82.22)){
+	  		transmuted[i] = 2.00;
+	  	} else if((rawGradeArray[i] >= 82.23) && (rawGradeArray[i] <= 86.67)){
+	  		transmuted[i] = 1.75;
+	  	} else if((rawGradeArray[i] >= 86.68) && (rawGradeArray[i] <= 91.11)){
+	  		transmuted[i] = 1.50;
+	  	} else if((rawGradeArray[i] >= 91.12) && (rawGradeArray[i] <= 95.56)){
+	  		transmuted[i] = 1.25;
+	  	} else if((rawGradeArray[i] >= 95.57) && (rawGradeArray[i] <= 100)){
+	  		transmuted[i] = 1.00;
+	  	}
+
+	  	// if-else code to determine if student passed or failed
+	  	if(rawGradeArray[i] >= 60){
+	  		standing[i] = "PASSED";
+	  	} else if(rawGradeArray[i] < 60){
+	  		standing[i] = "FAILED";
+	  	}
+
+		//used to ignore input
+	  	cin.ignore();
+ }
+  	  // grade for each student using for loop statement "card grade type"
+  	  cout << "_____________________________________________"<< endl;
+  	  for(int w = 0; w < 50; w++){
+  		cout << endl <<"Student number "<< (w+1) << ": "<< "(" << studentNames[w]<<")"<<endl;
+  		cout<<"Raw grade: "<< rawGradeArray[w]<<endl;
+  		cout<<"Final grade: "<< transmuted[w]<<endl;
+  		cout<<"Standing: " << standing[w];
+  		cout << endl<<"_____________________________________________" << "\n";
+  	 }
+				//NOTE: TOP 10 ONLY WORKS IF YOU INPUT 50 STUDENTS total!!!
+				//this code is for the list for the top 10 students "list type" 
+  		  	    int n = sizeof(rawGradeArray) / sizeof(rawGradeArray[0]);
+  		  	    	//vector paired units double and int
+					vector<pair<double, int> > vp;
+
+  		  	    for (int i = 0; i < n; ++i) {
+  		  	       		//used vp.push_back to put an element in an end of an array
+					    vp.push_back(make_pair(rawGradeArray[i], i+1));
+  		  	    }
+  		  	    sort(vp.begin(), vp.end());
+  		  	    cout << "Top 10 performing students in class: \n"  << endl;
+  		  	    cout <<"Top \t" <<"Raw Grade\t"<< "Student Number\t" <<  endl;
+  		  	    int number = 1;
+
+
+  		  	    for (int i = 10; i > 0 ; i--) {
+  		  	        cout << number++ << "\t "<<vp[i + 8].first << "\t\t" << vp[i + 8].second << endl;
+  		  	    }
+
+
+
+  			cout<<endl;
+
+// to change the number of students pls change in the main loop where " i < n " and in the grade for each student loop " w < n "  where n = number of students you want to enter
+
+  return 0;
+}
